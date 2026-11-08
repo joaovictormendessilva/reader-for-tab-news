@@ -1,4 +1,4 @@
 export const fonts = {
-  regular: 'Inter-Regular',
-  bold: 'Inter-Bold',
+  regular: 'interRegular',
+  bold: 'interBold',
 } as const;
