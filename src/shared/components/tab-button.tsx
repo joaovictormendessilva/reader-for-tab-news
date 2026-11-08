@@ -3,7 +3,7 @@ import { TabTriggerSlotProps } from "expo-router/ui";
 import { ComponentRef, Ref } from "react";
 import { Pressable, Text } from "react-native";
 
-import { DarkTheme } from "@/theme/dark-theme";
+import { DarkTheme } from "@/shared/theme/dark-theme";
 
 type TabButtonProps = Omit<TabTriggerSlotProps, "ref"> & {
   ref?: Ref<ComponentRef<typeof Pressable>>;

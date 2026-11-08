@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { fonts } from "@/constants/fonts";
+import { fonts } from "@/shared/constants/fonts";
 
 export default function Relevant() {
   return (

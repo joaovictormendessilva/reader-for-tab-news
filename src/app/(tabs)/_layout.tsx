@@ -1,9 +1,9 @@
 import { TabList, Tabs, TabSlot, TabTrigger } from "expo-router/ui";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { TabButton } from "@/components/tab-button";
-import { routes } from "@/constants/routes";
-import { DarkTheme } from "@/theme/dark-theme";
+import { TabButton } from "@/shared/components/tab-button";
+import { routes } from "@/shared/constants/routes";
+import { DarkTheme } from "@/shared/theme/dark-theme";
 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();

@@ -1,6 +1,6 @@
-import { Redirect } from 'expo-router';
+import { Redirect } from "expo-router";
 
-import { routes } from '@/constants/routes';
+import { routes } from "@/shared/constants/routes";
 
 export default function Index() {
   return <Redirect href={routes.relevant} />;
