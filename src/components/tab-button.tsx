@@ -1,39 +1,21 @@
-import type { ComponentProps } from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { TabTriggerSlotProps } from "expo-router/ui";
+import { ComponentRef, Ref } from "react";
+import { Pressable, Text } from "react-native";
 
-import { fonts } from '@/constants/fonts';
+import { DarkTheme } from "@/theme/dark-theme";
 
-type TabButtonProps = Omit<ComponentProps<typeof Pressable>, 'children'> & {
-  children: string;
-  isFocused?: boolean;
+type TabButtonProps = Omit<TabTriggerSlotProps, "ref"> & {
+  ref?: Ref<ComponentRef<typeof Pressable>>;
+  label: string;
+  icon: keyof typeof MaterialIcons.glyphMap;
 };
 
-export function TabButton({ children, isFocused, ...props }: TabButtonProps) {
+export function TabButton({ isFocused, label, icon, ...props }: TabButtonProps) {
   return (
-    <Pressable {...props} style={[styles.button, isFocused && styles.buttonFocused]}>
-      <Text style={[styles.label, isFocused && styles.labelFocused]}>{children}</Text>
+    <Pressable {...props} style={{ flexDirection: "column", alignItems: "center", gap: 8 }}>
+      <MaterialIcons name={icon} size={24} color={isFocused ? DarkTheme.colors.textHighlight : DarkTheme.colors.text} />
+      <Text className={isFocused ? "text-highlight" : "text-text"}>{label}</Text>
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    flex: 1,
-    alignItems: 'center',
-    paddingVertical: 12,
-    borderTopWidth: 2,
-    borderTopColor: 'transparent',
-  },
-  buttonFocused: {
-    borderTopColor: '#000',
-  },
-  label: {
-    fontFamily: fonts.regular,
-    fontSize: 14,
-    color: '#6b7280',
-  },
-  labelFocused: {
-    fontFamily: fonts.bold,
-    color: '#000',
-  },
-});

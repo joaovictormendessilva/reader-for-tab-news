@@ -1,9 +1,9 @@
 import { TabList, Tabs, TabSlot, TabTrigger } from "expo-router/ui";
-import { StyleSheet } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { TabButton } from "@/components/tab-button";
 import { routes } from "@/constants/routes";
+import { DarkTheme } from "@/theme/dark-theme";
 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
@@ -12,22 +12,22 @@ export default function TabsLayout() {
     <Tabs style={{ flex: 1, paddingTop: insets.top }}>
       <TabSlot />
 
-      <TabList style={[styles.tabList, { paddingBottom: insets.bottom }]}>
+      <TabList
+        style={{
+          backgroundColor: DarkTheme.colors.paper,
+          paddingBottom: insets.bottom + 8,
+          justifyContent: "space-around",
+          padding: 8,
+        }}
+      >
         <TabTrigger name="relevant" href={routes.relevant} asChild>
-          <TabButton>Relevantes</TabButton>
+          <TabButton icon="newspaper" label="Relevantes" />
         </TabTrigger>
+
         <TabTrigger name="recent" href={routes.recent} asChild>
-          <TabButton>Recentes</TabButton>
+          <TabButton icon="new-releases" label="Recentes" />
         </TabTrigger>
       </TabList>
     </Tabs>
   );
 }
-
-const styles = StyleSheet.create({
-  tabList: {
-    backgroundColor: "#ffffff",
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: "#e5e7eb",
-  },
-});
