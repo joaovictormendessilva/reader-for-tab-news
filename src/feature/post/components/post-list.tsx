@@ -2,11 +2,13 @@ import { FlatList } from "react-native";
 
 import { Repeat } from "@/shared/components/repeat";
 
-import { PostItem, PostItemProps } from "./post-item";
+import { Post } from "../post-types";
+import { PostItem } from "./post-item";
 import { PostItemSkeleton } from "./post-item-skeleton";
 
 type PostListProps = {
-  data: Omit<PostItemProps, "position">[];
+  data: Post[];
+  onPressPost: (post: Post) => void;
 
   isFirstLoading: boolean;
 
@@ -17,7 +19,15 @@ type PostListProps = {
   isLoadingNext: boolean;
 };
 
-export function PostList({ data, isFirstLoading, onRefresh, isRefreshing, onLoadNext, isLoadingNext }: PostListProps) {
+export function PostList({
+  data,
+  onPressPost,
+  isFirstLoading,
+  onRefresh,
+  isRefreshing,
+  onLoadNext,
+  isLoadingNext,
+}: PostListProps) {
   function handleEndReached() {
     if (isFirstLoading || isLoadingNext || isRefreshing) return;
 
@@ -34,10 +44,9 @@ export function PostList({ data, isFirstLoading, onRefresh, isRefreshing, onLoad
       keyExtractor={(item) => item.id}
       renderItem={({ item, index }) => (
         <PostItem
-          id={item.id}
           authorName={item.authorName}
           numberOfComments={item.numberOfComments}
-          onPress={item.onPress}
+          onPress={() => onPressPost(item)}
           position={index + 1}
           publishedAt={item.publishedAt}
           title={item.title}

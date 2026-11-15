@@ -2,8 +2,7 @@ import { Pressable, Text, View } from "react-native";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
-export type PostItemProps = {
-  id: string;
+type PostItemProps = {
   position: number;
   numberOfComments: number;
   authorName: string;
