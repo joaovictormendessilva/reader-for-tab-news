@@ -40,7 +40,7 @@ export function PostList({
       onRefresh={onRefresh}
       refreshing={isRefreshing}
       onEndReached={handleEndReached}
-      onEndReachedThreshold={1}
+      onEndReachedThreshold={2.5}
       keyExtractor={(item) => item.id}
       renderItem={({ item, index }) => (
         <PostItem
