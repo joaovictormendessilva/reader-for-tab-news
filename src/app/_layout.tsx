@@ -1,6 +1,6 @@
 import "@/global.css";
 
-import { QueryClientProvider } from "@tanstack/react-query";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -8,7 +8,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { View } from "react-native";
 
-import { queryClient } from "@/shared/api/query-client";
+import { ONE_DAY, queryClient, queryPersister } from "@/shared/api/query-client";
 import { fonts } from "@/shared/constants/fonts";
 
 SplashScreen.preventAutoHideAsync();
@@ -30,11 +30,11 @@ export default function RootLayout() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister: queryPersister, maxAge: ONE_DAY }}>
       <View className="flex-1 bg-background">
         <StatusBar style="light" />
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: "transparent" } }} />
       </View>
-    </QueryClientProvider>
+    </PersistQueryClientProvider>
   );
 }

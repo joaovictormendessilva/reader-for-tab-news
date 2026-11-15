@@ -6,7 +6,7 @@ type PostItemProps = {
   position: number;
   numberOfComments: number;
   authorName: string;
-  publishedAt: Date;
+  publishedAt: string;
   onPress: VoidFunction;
   title: string;
 };

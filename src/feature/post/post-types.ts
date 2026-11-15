@@ -6,5 +6,5 @@ export type Post = {
   title: string;
   authorName: string;
   numberOfComments: number;
-  publishedAt: Date;
+  publishedAt: string;
 };

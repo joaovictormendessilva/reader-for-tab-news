@@ -8,7 +8,7 @@ function toPost(content: ContentResponse): Post {
     title: content.title,
     authorName: content.owner_username,
     numberOfComments: content.children_deep_count,
-    publishedAt: new Date(content.published_at),
+    publishedAt: content.published_at,
   };
 }
 
