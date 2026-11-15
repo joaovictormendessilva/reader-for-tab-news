@@ -23,3 +23,12 @@ export type ContentResponse = {
   children_deep_count: number;
   type: string;
 };
+
+export type GetContentParams = {
+  username: string;
+  slug: string;
+};
+
+export type ContentDetailResponse = ContentResponse & {
+  body: string;
+};

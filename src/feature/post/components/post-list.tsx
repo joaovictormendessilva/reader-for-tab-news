@@ -2,13 +2,13 @@ import { FlatList } from "react-native";
 
 import { Repeat } from "@/shared/components/repeat";
 
-import { Post } from "../post-types";
+import { PostSummary } from "../post-types";
 import { PostItem } from "./post-item";
 import { PostItemSkeleton } from "./post-item-skeleton";
 
 type PostListProps = {
-  data: Post[];
-  onPressPost: (post: Post) => void;
+  data: PostSummary[] | undefined;
+  onPressPost: (post: PostSummary) => void;
 
   isFirstLoading: boolean;
 
@@ -16,6 +16,7 @@ type PostListProps = {
   isRefreshing: boolean;
 
   onLoadNext: VoidFunction;
+  hasNextPage: boolean;
   isLoadingNext: boolean;
 };
 
@@ -26,13 +27,14 @@ export function PostList({
   onRefresh,
   isRefreshing,
   onLoadNext,
+  hasNextPage,
   isLoadingNext,
 }: PostListProps) {
-  function handleEndReached() {
-    if (isFirstLoading || isLoadingNext || isRefreshing) return;
+  const handleEndReached = () => {
+    if (!hasNextPage || isFirstLoading || isLoadingNext || isRefreshing) return;
 
     onLoadNext();
-  }
+  };
 
   return (
     <FlatList
