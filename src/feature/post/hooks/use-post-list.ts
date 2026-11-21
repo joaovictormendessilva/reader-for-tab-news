@@ -9,5 +9,11 @@ export const usePostList = (params: Omit<GetPostsParams, "page">) =>
     queryFn: ({ pageParam }) => postService.getPosts({ ...params, page: pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, _allPages, lastPageParam) => (lastPage.hasNextPage ? lastPageParam + 1 : undefined),
-    select: (data) => data.pages.flatMap((page) => page.posts),
+    select: (data) => {
+      const mergedPosts = data.pages.flatMap((page) => page.posts);
+
+      const uniquePosts = [...new Map(mergedPosts.map((post) => [post.id, post])).values()];
+
+      return uniquePosts;
+    },
   });
