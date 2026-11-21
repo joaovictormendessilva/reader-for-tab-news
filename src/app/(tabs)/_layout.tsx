@@ -9,7 +9,7 @@ export default function TabsLayout() {
   const insets = useSafeAreaInsets();
 
   return (
-    <Tabs style={{ flex: 1, paddingTop: insets.top }}>
+    <Tabs style={{ flex: 1 }}>
       <TabSlot />
 
       <TabList
