@@ -3,7 +3,7 @@ import { ptBR } from "date-fns/locale";
 import { useLocalSearchParams } from "expo-router";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 
-import { usePost } from "@/feature/post/hooks/use-post";
+import { usePost } from "@/features/post/hooks/use-post";
 import { Header } from "@/shared/components/header";
 import { MarkdownReader } from "@/shared/components/markdown-reader";
 import { tabNewsUrl } from "@/shared/constants/tab-news-url";

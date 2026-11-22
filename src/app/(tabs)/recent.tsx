@@ -1,8 +1,8 @@
 import { useRouter } from "expo-router";
 import { View } from "react-native";
 
-import { PostList } from "@/feature/post/components/post-list";
-import { usePostList } from "@/feature/post/hooks/use-post-list";
+import { PostList } from "@/features/post/components/post-list";
+import { usePostList } from "@/features/post/hooks/use-post-list";
 import { Header } from "@/shared/components/header";
 import { postReaderHref } from "@/shared/constants/routes";
 
