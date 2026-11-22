@@ -22,12 +22,16 @@
         "foregroundImage": "./assets/android-icon-foreground.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.joaovictormsilva.readerfortabnews"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "expo-status-bar", "expo-font",
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-font",
       [
         "expo-splash-screen",
         {
@@ -42,6 +46,16 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "edc6573d-ea06-4551-999b-4bbdfaafd784"
+      }
     }
   }
 }
