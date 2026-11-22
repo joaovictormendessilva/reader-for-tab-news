@@ -23,11 +23,11 @@ export type PostParams = {
   slug: string;
 };
 
-export type Comment = {
+type CommentBase = {
   id: string;
-  body: string;
-  publishedAt: string;
-  ownerUsername: string;
   comments: Comment[];
   commentDeepCount: number;
 };
+
+export type Comment = CommentBase &
+  ({ isDeleted: false; body: string; publishedAt: string; ownerUsername: string } | { isDeleted: true });

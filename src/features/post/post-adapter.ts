@@ -1,4 +1,4 @@
-import { ChildResponse, ContentDetailResponse, ContentResponse } from "./api/post-api-types";
+import { ChildResponse, ContentDetailResponse, ContentResponse, PublishedChildResponse } from "./api/post-api-types";
 import { Comment, Post, PostSummary } from "./post-types";
 
 const toPostSummary = (content: ContentResponse): PostSummary => ({
@@ -15,14 +15,28 @@ const toPost = (content: ContentDetailResponse): Post => ({
   body: content.body,
 });
 
-const toComment = (child: ChildResponse): Comment => ({
-  id: child.id,
-  body: child.body,
-  publishedAt: child.published_at,
-  ownerUsername: child.owner_username,
-  comments: child.children?.length && child.children?.length > 0 ? child.children.map((c) => toComment(c)) : [],
-  commentDeepCount: child.children_deep_count,
-});
+const isPublishedChild = (child: ChildResponse): child is PublishedChildResponse => "body" in child;
+
+const toComment = (child: ChildResponse): Comment => {
+  if (isPublishedChild(child)) {
+    return {
+      id: child.id,
+      isDeleted: false,
+      body: child.body,
+      publishedAt: child.published_at,
+      ownerUsername: child.owner_username,
+      comments: child.children?.map(toComment) ?? [],
+      commentDeepCount: child.children_deep_count,
+    };
+  }
+
+  return {
+    id: child.id,
+    isDeleted: true,
+    comments: child.children?.map(toComment) ?? [],
+    commentDeepCount: child.children_deep_count,
+  };
+};
 
 export const postAdapter = {
   toPostSummary,

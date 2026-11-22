@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { ONE_DAY, queryClient, queryPersister } from "@/shared/api/query-client";
+import { CACHE_VERSION, ONE_DAY, queryClient, queryPersister } from "@/shared/api/query-client";
 import { fonts } from "@/shared/constants/fonts";
 import { DarkTheme } from "@/shared/theme/dark-theme";
 
@@ -34,7 +34,7 @@ export default function RootLayout() {
   }
 
   return (
-    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister: queryPersister, maxAge: ONE_DAY }}>
+    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister: queryPersister, maxAge: ONE_DAY, buster: CACHE_VERSION }}>
       <StatusBar style="light" />
       <View style={{ flex: 1, paddingTop: insets.top }}>
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: DarkTheme.colors.background } }} />

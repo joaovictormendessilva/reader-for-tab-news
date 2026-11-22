@@ -19,17 +19,23 @@ export function CommentList({ comments }: CommentListProps) {
       </View>
 
       <View className="flex-1 gap-2">
-        <View className="flex-row items-center gap-2">
-          <Text className="font-family-regular text-sm text-textHighlight bg-blue-950 w-fit rounded-sm px-1 py-0.5">
-            {comment.ownerUsername}
-          </Text>
-          <Text className="font-family-regular text-sm text-textMuted">
-            {formatDistanceToNow(comment.publishedAt, { locale: ptBR, addSuffix: true })}
-          </Text>
-        </View>
+        {!comment.isDeleted && (
+          <View className="flex-row items-center gap-2">
+            <Text className="font-family-regular text-sm text-textHighlight bg-blue-950 w-fit rounded-sm px-1 py-0.5">
+              {comment.ownerUsername}
+            </Text>
+            <Text className="font-family-regular text-sm text-textMuted">
+              {formatDistanceToNow(comment.publishedAt, { locale: ptBR, addSuffix: true })}
+            </Text>
+          </View>
+        )}
 
         <View className="flex-col gap-2">
-          <MarkdownReader content={comment.body} />
+          {comment.isDeleted ? (
+            <Text className="font-family-regular text-sm text-textMuted italic">Comentário excluído</Text>
+          ) : (
+            <MarkdownReader content={comment.body} />
+          )}
 
           <CommentList comments={comment.comments} />
         </View>

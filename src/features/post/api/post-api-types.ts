@@ -33,7 +33,7 @@ export type ContentDetailResponse = ContentResponse & {
   body: string;
 };
 
-export type ChildResponse = {
+export type PublishedChildResponse = {
   id: string;
   parent_id: string;
   owner_id: string;
@@ -54,3 +54,10 @@ export type ChildResponse = {
   children: ChildResponse[] | null;
   children_deep_count: number;
 };
+
+export type DeletedChildResponse = Pick<
+  PublishedChildResponse,
+  "id" | "parent_id" | "type" | "children" | "children_deep_count"
+>;
+
+export type ChildResponse = PublishedChildResponse | DeletedChildResponse;
