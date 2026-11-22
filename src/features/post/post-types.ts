@@ -6,6 +6,7 @@ export type PostSummary = {
   title: string;
   authorName: string;
   numberOfComments: number;
+  tabcoins: number;
   publishedAt: string;
 };
 
@@ -26,8 +27,18 @@ export type PostParams = {
 type CommentBase = {
   id: string;
   comments: Comment[];
-  commentDeepCount: number;
 };
 
-export type Comment = CommentBase &
-  ({ isDeleted: false; body: string; publishedAt: string; ownerUsername: string } | { isDeleted: true });
+export type PublishedComment = CommentBase & {
+  isDeleted: false;
+  body: string;
+  authorName: string;
+  tabcoins: number;
+  publishedAt: string;
+};
+
+export type DeletedComment = CommentBase & {
+  isDeleted: true;
+};
+
+export type Comment = PublishedComment | DeletedComment;

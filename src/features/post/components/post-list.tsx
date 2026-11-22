@@ -45,14 +45,7 @@ export function PostList({
       onEndReachedThreshold={2.5}
       keyExtractor={(item) => item.id}
       renderItem={({ item, index }) => (
-        <PostItem
-          authorName={item.authorName}
-          numberOfComments={item.numberOfComments}
-          onPress={() => onPressPost(item)}
-          position={index + 1}
-          publishedAt={item.publishedAt}
-          title={item.title}
-        />
+        <PostItem post={item} position={index + 1} onPress={() => onPressPost(item)} />
       )}
       ListFooterComponent={
         isFirstLoading || isLoadingNext ? (

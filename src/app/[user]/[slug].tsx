@@ -1,9 +1,8 @@
-import { formatDistanceToNow } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import { useLocalSearchParams } from "expo-router";
 import { ActivityIndicator, ScrollView, Text, View } from "react-native";
 
 import { CommentList } from "@/features/post/components/comment-list";
+import { ThreadItem } from "@/features/post/components/thread-item";
 import { useCommentList } from "@/features/post/hooks/use-comment-list";
 import { usePost } from "@/features/post/hooks/use-post";
 import { Header } from "@/shared/components/header";
@@ -33,32 +32,11 @@ export default function Reader() {
 
       {postData && (
         <ScrollView className="flex-1" contentContainerClassName="px-4 pb-8 gap-2">
-          <View className="overflow-hidden flex-1 flex-row gap-2">
-            <View className="flex-col items-center gap-2">
-              <Text className="font-family-regular text-base text-textMuted">{postData.numberOfComments}</Text>
-              <View className="h-full border-r-[0.25] border-textMuted" />
-            </View>
-
-            <View className="flex-1">
-              <View className="flex-row items-center gap-2">
-                <Text className="font-family-regular text-sm text-textHighlight bg-blue-950 w-fit rounded-sm px-1 py-0.5">
-                  {postData.authorName}
-                </Text>
-                <Text className="font-family-regular text-sm text-textMuted">
-                  {Math.ceil(postData.body.split(/\s+/).length / 200)} min de leitura
-                </Text>
-                <Text className="font-family-regular text-sm text-textMuted">
-                  {formatDistanceToNow(postData.publishedAt, { locale: ptBR, addSuffix: true })}
-                </Text>
-              </View>
-
-              <View className="flex-col gap-2">
-                <Text className="text-text text-lg font-family-bold">{title}</Text>
-                <View className="w-full border-b-[0.25] border-textMuted" />
-                <MarkdownReader content={postData.body} />
-              </View>
-            </View>
-          </View>
+          <ThreadItem content={postData} info={`${Math.ceil(postData.body.split(/\s+/).length / 200)} min de leitura`}>
+            <Text className="text-text text-lg font-family-bold">{title}</Text>
+            <View className="w-full border-b-[0.25] border-textMuted" />
+            <MarkdownReader content={postData.body} />
+          </ThreadItem>
 
           {!!commentsData?.length && (
             <View className="px-3 py-4 gap-4 bg-paper rounded-lg">

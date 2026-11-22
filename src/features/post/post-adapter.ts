@@ -7,6 +7,7 @@ const toPostSummary = (content: ContentResponse): PostSummary => ({
   title: content.title,
   authorName: content.owner_username,
   numberOfComments: content.children_deep_count,
+  tabcoins: content.tabcoins,
   publishedAt: content.published_at,
 });
 
@@ -18,23 +19,22 @@ const toPost = (content: ContentDetailResponse): Post => ({
 const isPublishedChild = (child: ChildResponse): child is PublishedChildResponse => "body" in child;
 
 const toComment = (child: ChildResponse): Comment => {
-  if (isPublishedChild(child)) {
+  if (!isPublishedChild(child)) {
     return {
       id: child.id,
-      isDeleted: false,
-      body: child.body,
-      publishedAt: child.published_at,
-      ownerUsername: child.owner_username,
+      isDeleted: true,
       comments: child.children?.map(toComment) ?? [],
-      commentDeepCount: child.children_deep_count,
     };
   }
 
   return {
     id: child.id,
-    isDeleted: true,
+    isDeleted: false,
+    body: child.body,
+    authorName: child.owner_username,
+    tabcoins: child.tabcoins,
+    publishedAt: child.published_at,
     comments: child.children?.map(toComment) ?? [],
-    commentDeepCount: child.children_deep_count,
   };
 };
 

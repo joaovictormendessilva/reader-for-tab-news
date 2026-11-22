@@ -4,7 +4,7 @@ import { QueryClient } from "@tanstack/react-query";
 
 const ONE_MINUTE = 60 * 1000;
 export const ONE_DAY = 24 * 60 * ONE_MINUTE;
-export const CACHE_VERSION = "2";
+export const CACHE_VERSION = "3";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
