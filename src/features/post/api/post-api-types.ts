@@ -1,4 +1,4 @@
-export type GetContentsParams = {
+export type GetContentsRequest = {
   page: number;
   per_page: number;
   strategy: "relevant" | "new" | "old";
@@ -24,11 +24,33 @@ export type ContentResponse = {
   type: string;
 };
 
-export type GetContentParams = {
+export type ContentRequest = {
   username: string;
   slug: string;
 };
 
 export type ContentDetailResponse = ContentResponse & {
   body: string;
+};
+
+export type ChildResponse = {
+  id: string;
+  parent_id: string;
+  owner_id: string;
+  slug: string;
+  title: string | null;
+  body: string;
+  status: string;
+  source_url: string | null;
+  published_at: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+  type: string;
+  owner_username: string;
+  tabcoins: number;
+  tabcoins_credit: number;
+  tabcoins_debit: number;
+  children: ChildResponse[] | null;
+  children_deep_count: number;
 };

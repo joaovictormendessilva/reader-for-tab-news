@@ -18,7 +18,16 @@ export type GetPostsParams = {
   page: number;
 };
 
-export type GetPostParams = {
+export type PostParams = {
   username: string;
   slug: string;
+};
+
+export type Comment = {
+  id: string;
+  body: string;
+  publishedAt: string;
+  ownerUsername: string;
+  comments: Comment[];
+  commentDeepCount: number;
 };
