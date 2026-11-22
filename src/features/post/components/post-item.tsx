@@ -1,6 +1,6 @@
-import { Pressable, Text, View } from "react-native";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { Pressable, Text, View } from "react-native";
 
 type PostItemProps = {
   position: number;
